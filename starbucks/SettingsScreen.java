@@ -1,4 +1,10 @@
-public class SettingsScreen implements AppScreen {
+public class SettingsScreen implements Screen {
+
+	AppController controller;
+
+	public SettingsScreen(AppController controller) {
+		this.controller = controller;
+	}
 
 	public void touch(int x, int y) {
 		if (y == 3) {

@@ -1,4 +1,11 @@
-public class PaymentsScreen implements AppScreen {
+
+public class PaymentsScreen implements Screen {
+	
+	AppController controller;
+	
+	public PaymentsScreen(AppController controller){
+		this.controller = controller;
+	}
 
 	public void touch(int x, int y) {
 	}

@@ -1,48 +1,57 @@
-public class AppController implements AppScreen, IMenuBar {
+public class AppController implements Screen, MenuBar {
+
 	// State pattern
+	PinScreen PinScreen;
+	MainScreen MainScreen;
+	PayScreen PayScreen;
+	OptionsScreen OptionsScreen;
+	MoreOptionsScreen MoreOptionsScreen;
+	PaymentsScreen PaymentsScreen;
+	RewardsScreen RewardsScreen;
+	StoresScreen StoresScreen;
+	SettingsScreen SettingsScreen;
+	AddNewCardScreen AddNewCardScreen;
+	private Screen screen;
 
-	public final PinScreen PinScreen = new PinScreen();
-	public final MainScreen MainScreen = new MainScreen();
-	public final PayScreen PayScreen = new PayScreen();
-	public final OptionsScreen OptionsScreen = new OptionsScreen();
-	public final MoreOptionsScreen MoreOptionsScreen = new MoreOptionsScreen();
-	public final PaymentsScreen PaymentsScreen = new PaymentsScreen();
-	public final RewardsScreen RewardsScreen = new RewardsScreen();
-	public final StoresScreen StoresScreen = new StoresScreen();
-	public final SettingsScreen SettingsScreen = new SettingsScreen();
-	public final AddNewCardScreen AddNewCardScreen = new AddNewCardScreen();
-
-	AppScreen screen;
-
-	public void setScreen(AppScreen screen) {
+	public Screen setScreen(Screen screen) {
 		this.screen = screen;
-		this.screen.display();
+		screen.display();
+
+		return this.screen;
+	}
+
+	public Screen getScreen() {
+		return screen;
 	}
 
 	// Singleton pattern
-
 	static AppController appController = new AppController();
 
 	private AppController() {
-
 	}
 
-	public AppController getAppController() {
+	public static AppController getAppController() {
 		return appController;
 	}
 
 	public void startUp() {
+		PinScreen = new PinScreen(this);
+		MainScreen = new MainScreen(this);
+		PayScreen = new PayScreen(this);
+		OptionsScreen = new OptionsScreen(this);
+		MoreOptionsScreen = new MoreOptionsScreen(this);
+		PaymentsScreen = new PaymentsScreen(this);
+		RewardsScreen = new RewardsScreen(this);
+		StoresScreen = new StoresScreen(this);
+		SettingsScreen = new SettingsScreen(this);
+		AddNewCardScreen = new AddNewCardScreen(this);
 		setScreen(this.PinScreen);
 	}
 
-	public String onScreen() {
-		return screen.display();
-	}
-
-	// AppScreen
-
+	// Screen
 	public void touch(int x, int y) {
 		screen.touch(x, y);
+		System.out.println(screen.display());
 	}
 
 	public String display() {
@@ -50,47 +59,42 @@ public class AppController implements AppScreen, IMenuBar {
 	}
 
 	public void topLeftCmd() {
-		screen.display();
+		screen.topLeftCmd();
 	}
 
 	public void topRightCmd() {
-		screen.display();
+		screen.topRightCmd();
 	}
 
-	// IMenubar public methods
+	// MenuBar public methods
 
 	public void menuCards() {
 		if (screen instanceof PinScreen)
 			return;
-
 		setScreen(this.MainScreen);
 	}
 
 	public void menuPayments() {
 		if (screen instanceof PinScreen)
 			return;
-
 		setScreen(this.PaymentsScreen);
 	}
 
 	public void menuRewards() {
 		if (screen instanceof PinScreen)
 			return;
-
 		setScreen(this.RewardsScreen);
 	}
 
 	public void menuStores() {
 		if (screen instanceof PinScreen)
 			return;
-
 		setScreen(this.StoresScreen);
 	}
 
 	public void menuSettings() {
 		if (screen instanceof PinScreen)
 			return;
-
 		setScreen(this.SettingsScreen);
 	}
 }

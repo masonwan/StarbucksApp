@@ -1,7 +1,12 @@
-public class StoresScreen implements AppScreen {
+public class StoresScreen implements Screen {
+
+	AppController controller;
+
+	public StoresScreen(AppController controller) {
+		this.controller = controller;
+	}
 
 	public void touch(int x, int y) {
-
 	}
 
 	public String display() {
@@ -9,10 +14,8 @@ public class StoresScreen implements AppScreen {
 	}
 
 	public void topLeftCmd() {
-
 	}
 
 	public void topRightCmd() {
-
 	}
 }

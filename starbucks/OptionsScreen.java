@@ -1,8 +1,14 @@
-public class OptionsScreen implements AppScreen {
+public class OptionsScreen implements Screen {
+
+	AppController controller;
+
+	public OptionsScreen(AppController controller) {
+		this.controller = controller;
+	}
 
 	public void touch(int x, int y) {
-		if (y == 7) {
-			// Go to MoreOptionsScreen.
+		if (x >= 1 && x <= 3 && y == 7) {
+			controller.setScreen(controller.MoreOptionsScreen);
 		}
 	}
 

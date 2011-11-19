@@ -1,4 +1,10 @@
-public class MoreOptionsScreen implements AppScreen {
+public class MoreOptionsScreen implements Screen {
+
+	AppController controller;
+
+	public MoreOptionsScreen(AppController controller) {
+		this.controller = controller;
+	}
 
 	public void touch(int x, int y) {
 	}

@@ -1,4 +1,10 @@
-public class AddNewCardScreen implements AppScreen {
+public class AddNewCardScreen implements Screen {
+
+	AppController controller;
+
+	public AddNewCardScreen(AppController controller) {
+		this.controller = controller;
+	}
 
 	public void touch(int x, int y) {
 	}

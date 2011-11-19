@@ -1,4 +1,4 @@
-public interface IMenuBar {
+public interface MenuBar {
 
 	public void menuCards();
 
