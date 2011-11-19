@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.params=
-comment0.target=double\ getBalance()
-comment1.params=amt
-comment1.target=void\ pay(float)
-numComments=2

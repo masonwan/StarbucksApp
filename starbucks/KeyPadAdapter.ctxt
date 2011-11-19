@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.params=keyPad
-comment0.target=KeyPadAdapter(KeyPad)
-comment1.params=x\ y
-comment1.target=char\ press(int,\ int)
-numComments=2
