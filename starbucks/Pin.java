@@ -1,9 +1,11 @@
 public class Pin {
 
-	char[] keys;
+	char[] keys = new char[4];
 
-	public Pin(String keys) {
-		this.keys = keys.toCharArray();
+	public Pin(char[] keys) {
+		for (int i = 0; i < keys.length; i++) {
+			this.keys[i] = keys[i];
+		}
 	}
 
 	public boolean validate(char[] keys) {

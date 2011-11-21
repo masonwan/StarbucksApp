@@ -1,10 +1,18 @@
 public class Card {
 
+	float balance = 16.50f;
+	Pin pin = new Pin(new char[4]);
+
 	public double getBalance() {
-		return .0;
+		return balance;
 	}
 
-	public void pay(float amt) {
+	public boolean pay(float amount) {
+		if (balance >= amount) {
+			balance -= amount;
+			return true;
+		}
 
+		return false;
 	}
 }

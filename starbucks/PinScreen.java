@@ -1,4 +1,6 @@
-public class PinScreen implements Screen {
+import java.util.ArrayList;
+
+public class PinScreen implements Screen, Subject {
 
 	// Key management.
 
@@ -6,26 +8,29 @@ public class PinScreen implements Screen {
 	char[] keys;
 	KeyPadAdapter keyPad;
 	Pin pin;
-	
+
 	AppController controller;
+	PasscodeDisplay passcodeDisplay;
 
 	public PinScreen(AppController controller) {
 		this.controller = controller;
-		
+
 		keyIndex = 0;
 		keys = new char[4];
 
 		keyPad = new KeyPadAdapter();
-		pin = new Pin("1234");
+		pin = new Pin("1234".toCharArray());
 
-		state = ZeroPin;
+		setState(ZeroPin);
+
+		attach(passcodeDisplay = new PasscodeDisplay());
 	}
 
 	// Implement Screen
 
 	@Override
 	public void touch(final int x, final int y) {
-		state.handle(x, y);
+		state.handle(keyPad.press(x, y));
 	}
 
 	@Override
@@ -33,7 +38,7 @@ public class PinScreen implements Screen {
 		final StringBuilder builder = new StringBuilder();
 
 		for (int i = 0; i < keyIndex; i++) {
-			builder.append(keys[i]);
+			builder.append('*');
 		}
 
 		return builder.toString();
@@ -56,11 +61,22 @@ public class PinScreen implements Screen {
 	public final TwoPins TwoPins = new TwoPins(this);
 	public final ThreePins ThreePins = new ThreePins(this);
 
-	State state;
+	private State state;
+
+	public State setState(State state) {
+		this.state = state;
+		inform();
+
+		return this.state;
+	}
+
+	public State getState() {
+		return state;
+	}
 
 	interface State {
 
-		void handle(int x, int y);
+		void handle(char pressedKey);
 	}
 
 	class ZeroPin implements State {
@@ -72,12 +88,10 @@ public class PinScreen implements Screen {
 		}
 
 		@Override
-		public void handle(final int x, final int y) {
-			final char pressedKey = keyPad.press(x, y);
-
-			if (pressedKey >= '0' || pressedKey <= '9') {
+		public void handle(char pressedKey) {
+			if (pressedKey >= '0' && pressedKey <= '9') {
 				keys[keyIndex++] = pressedKey;
-				state = OnePin;
+				setState(OnePin);
 			}
 		}
 	}
@@ -91,15 +105,13 @@ public class PinScreen implements Screen {
 		}
 
 		@Override
-		public void handle(final int x, final int y) {
-			final char pressedKey = keyPad.press(x, y);
-
-			if (pressedKey >= '0' || pressedKey <= '9') {
+		public void handle(char pressedKey) {
+			if (pressedKey >= '0' && pressedKey <= '9') {
 				keys[keyIndex++] = pressedKey;
-				state = TwoPins;
+				setState(TwoPins);
 			} else if (pressedKey == 'X') {
 				--keyIndex;
-				state = OnePin;
+				setState(ZeroPin);
 			}
 		}
 	}
@@ -113,15 +125,13 @@ public class PinScreen implements Screen {
 		}
 
 		@Override
-		public void handle(final int x, final int y) {
-			final char pressedKey = keyPad.press(x, y);
-
-			if (pressedKey >= '0' || pressedKey <= '9') {
+		public void handle(char pressedKey) {
+			if (pressedKey >= '0' && pressedKey <= '9') {
 				keys[keyIndex++] = pressedKey;
-				state = ThreePins;
+				setState(ThreePins);
 			} else if (pressedKey == 'X') {
 				--keyIndex;
-				state = OnePin;
+				setState(OnePin);
 			}
 		}
 	}
@@ -135,24 +145,44 @@ public class PinScreen implements Screen {
 		}
 
 		@Override
-		public void handle(final int x, final int y) {
-			final char pressedKey = keyPad.press(x, y);
-
-			if (pressedKey >= '0' || pressedKey <= '9') {
+		public void handle(char pressedKey) {
+			if (pressedKey >= '0' && pressedKey <= '9') {
 				keys[keyIndex++] = pressedKey;
 
-				final boolean isValid = pin.validate(keys);
+				boolean isValid = pin.validate(keys);
 
 				if (isValid) {
 					controller.setScreen(controller.MainScreen);
 				} else {
 					keyIndex = 0;
-					state = ZeroPin;
+					setState(ZeroPin);
 				}
 			} else if (pressedKey == 'X') {
 				--keyIndex;
-				state = TwoPins;
+				setState(TwoPins);
 			}
+		}
+	}
+
+	// Implement Subject interface.
+	// Observer pattern.
+
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
+
+	@Override
+	public void attach(Observer o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void inform() {
+		for (Observer observer : observers) {
+			observer.update(this, keyIndex);
 		}
 	}
 }

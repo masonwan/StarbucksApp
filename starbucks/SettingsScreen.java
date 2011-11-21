@@ -6,20 +6,24 @@ public class SettingsScreen implements Screen {
 		this.controller = controller;
 	}
 
+	@Override
 	public void touch(int x, int y) {
-		if (y == 3) {
-			// Go to AddNewCardScreen.
+		if (x >= 1 && x <= 3 && y == 3) {
+			controller.setScreen(controller.AddNewCardScreen);
 		}
 	}
 
+	@Override
 	public String display() {
-		return "Add Starbucks Cards, Delete Starbucks Cards, Billing Information, Starbucks Cards Account";
+		return "Manage Cards, Billing, Passcode, Show About & Terms";
 	}
 
+	@Override
 	public void topLeftCmd() {
 
 	}
 
+	@Override
 	public void topRightCmd() {
 
 	}

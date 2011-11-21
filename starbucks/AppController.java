@@ -1,6 +1,19 @@
 public class AppController implements Screen, MenuBar {
+	
+	// Card management.
+	
+	private Card card = new Card();
+	
+	public Card getCard(){
+		return card;
+	}
+	
+	public void setCard(Card card){
+		this.card = card;
+	}
 
-	// State pattern
+	// State pattern.
+
 	PinScreen PinScreen;
 	MainScreen MainScreen;
 	PayScreen PayScreen;
@@ -24,11 +37,12 @@ public class AppController implements Screen, MenuBar {
 		return screen;
 	}
 
-	// Singleton pattern
-	static AppController appController = new AppController();
+	// Singleton pattern.
 
-	private AppController() {
+	private AppController() { // Prevent instantiation.
 	}
+
+	static AppController appController = new AppController();
 
 	public static AppController getAppController() {
 		return appController;
@@ -48,53 +62,141 @@ public class AppController implements Screen, MenuBar {
 		setScreen(this.PinScreen);
 	}
 
-	// Screen
+	// Implement Screen interface.
+
+	@Override
 	public void touch(int x, int y) {
 		screen.touch(x, y);
 		System.out.println(screen.display());
 	}
 
+	@Override
 	public String display() {
 		return screen.display();
 	}
 
+	@Override
 	public void topLeftCmd() {
 		screen.topLeftCmd();
 	}
 
+	@Override
 	public void topRightCmd() {
 		screen.topRightCmd();
 	}
 
-	// MenuBar public methods
+	// Implement MenuBar interface.
 
+	@Override
 	public void menuCards() {
-		if (screen instanceof PinScreen)
-			return;
-		setScreen(this.MainScreen);
+		command = new CardMenuCommand(this);
+		command.execute();
 	}
 
+	@Override
 	public void menuPayments() {
-		if (screen instanceof PinScreen)
-			return;
-		setScreen(this.PaymentsScreen);
+		command = new PaymentMenuCommand(this);
+		command.execute();
 	}
 
+	@Override
 	public void menuRewards() {
-		if (screen instanceof PinScreen)
-			return;
-		setScreen(this.RewardsScreen);
+		command = new RewardsMenuCommand(this);
+		command.execute();
 	}
 
+	@Override
 	public void menuStores() {
-		if (screen instanceof PinScreen)
-			return;
-		setScreen(this.StoresScreen);
+		command = new StoresMenuCommand(this);
+		command.execute();
 	}
 
+	@Override
 	public void menuSettings() {
-		if (screen instanceof PinScreen)
-			return;
-		setScreen(this.SettingsScreen);
+		command = new SettingsMenuCommand(this);
+		command.execute();
+	}
+
+	// Command pattern
+
+	Command command;
+
+	interface Command {
+		void execute();
+	}
+
+	class CardMenuCommand implements Command {
+		AppController controller;
+
+		public CardMenuCommand(AppController controller) {
+			this.controller = controller;
+		}
+
+		@Override
+		public void execute() {
+			if (screen instanceof PinScreen)
+				return;
+			controller.setScreen(controller.MainScreen);
+		}
+	}
+
+	class PaymentMenuCommand implements Command {
+		AppController controller;
+
+		public PaymentMenuCommand(AppController controller) {
+			this.controller = controller;
+		}
+
+		@Override
+		public void execute() {
+			if (controller.getScreen() instanceof PinScreen)
+				return;
+			controller.setScreen(controller.PaymentsScreen);
+		}
+	}
+
+	class RewardsMenuCommand implements Command {
+		AppController controller;
+
+		public RewardsMenuCommand(AppController controller) {
+			this.controller = controller;
+		}
+
+		@Override
+		public void execute() {
+			if (controller.getScreen() instanceof PinScreen)
+				return;
+			controller.setScreen(controller.RewardsScreen);
+		}
+	}
+
+	class StoresMenuCommand implements Command {
+		AppController controller;
+
+		public StoresMenuCommand(AppController controller) {
+			this.controller = controller;
+		}
+
+		@Override
+		public void execute() {
+			if (controller.getScreen() instanceof PinScreen)
+				return;
+			controller.setScreen(controller.StoresScreen);
+		}
+	}
+
+	class SettingsMenuCommand implements Command {
+		AppController controller;
+
+		public SettingsMenuCommand(AppController controller) {
+			this.controller = controller;
+		}
+
+		@Override
+		public void execute() {
+			if (controller.getScreen() instanceof PinScreen)
+				return;
+			controller.setScreen(controller.SettingsScreen);
+		}
 	}
 }
