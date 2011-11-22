@@ -1,3 +1,4 @@
+package core;
 public class Pin {
 
 	char[] keys = new char[4];

@@ -1,4 +1,7 @@
+package tests;
 import static org.junit.Assert.*;
+import core.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

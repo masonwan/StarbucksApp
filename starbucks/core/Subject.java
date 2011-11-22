@@ -1,3 +1,4 @@
+package core;
 public interface Subject {
 	public void attach(Observer o);
 

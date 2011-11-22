@@ -1,4 +1,9 @@
+package tests;
+
 import static org.junit.Assert.*;
+import core.*;
+import screens.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +37,7 @@ public class AppControllerTest {
 		app.touch(2, 8); // 0
 		app.touch(1, 6); // 4
 		assertTrue(app.getScreen() instanceof PinScreen);
-		assertTrue(((PinScreen) app.getScreen()).keyIndex == 0);
+		assertTrue(((PinScreen) app.getScreen()).getNumKeys() == 0);
 	}
 
 	@Test

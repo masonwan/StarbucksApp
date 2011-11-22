@@ -1,3 +1,5 @@
+package core;
+
 public class Card {
 
 	float balance = 16.50f;

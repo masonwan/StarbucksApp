@@ -1,3 +1,4 @@
+package core;
 public class KeyPad {
 
 	public char press(int x, int y) {

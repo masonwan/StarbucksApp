@@ -1,20 +1,31 @@
+package screens;
+
+import core.*;
+
 import java.util.ArrayList;
 
-public class PinScreen implements Screen, Subject {
+public class PinScreen extends ScreenBase implements Subject {
 
 	// Key management.
 
-	int keyIndex;
-	char[] keys;
-	KeyPadAdapter keyPad;
-	Pin pin;
+	private int keyIndex;
+	private char[] keys;
+	private Pin pin;
 
-	AppController controller;
-	PasscodeDisplay passcodeDisplay;
+	public int getNumKeys() {
+		return keyIndex;
+	}
 
-	public PinScreen(AppController controller) {
-		this.controller = controller;
+	private KeyPadAdapter keyPad;
 
+	public KeyPadAdapter getKeyPad() {
+		return keyPad;
+	}
+
+	private PasscodeDisplay passcodeDisplay;
+	private Handler handler;
+
+	public PinScreen() {
 		keyIndex = 0;
 		keys = new char[4];
 
@@ -24,24 +35,30 @@ public class PinScreen implements Screen, Subject {
 		setState(ZeroPin);
 
 		attach(passcodeDisplay = new PasscodeDisplay());
+
+		handler = new PinScreenTouchHandler();
+		handler.setNext(new PinScreenDisplayHandler());
 	}
 
 	// Implement Screen
 
 	@Override
-	public void touch(final int x, final int y) {
-		state.handle(keyPad.press(x, y));
+	public void touch(int x, int y) {
+		handler.handle(this, new int[] { x, y });
+		// state.handle(keyPad.press(x, y));
 	}
 
 	@Override
-	public String display() {
-		final StringBuilder builder = new StringBuilder();
+	public void display() {
+		handler.handle(this, null);
 
-		for (int i = 0; i < keyIndex; i++) {
-			builder.append('*');
-		}
-
-		return builder.toString();
+		// StringBuilder builder = new StringBuilder();
+		//
+		// for (int i = 0; i < keyIndex; i++) {
+		// builder.append('*');
+		// }
+		//
+		// System.out.println(builder.toString());
 	}
 
 	@Override
@@ -54,32 +71,27 @@ public class PinScreen implements Screen, Subject {
 
 	}
 
-	// State pattern.
+	// PinState pattern.
 
 	public final ZeroPin ZeroPin = new ZeroPin(this);
 	public final OnePin OnePin = new OnePin(this);
 	public final TwoPins TwoPins = new TwoPins(this);
 	public final ThreePins ThreePins = new ThreePins(this);
 
-	private State state;
+	private PinState state;
 
-	public State setState(State state) {
+	public PinState setState(PinState state) {
 		this.state = state;
 		inform();
 
 		return this.state;
 	}
 
-	public State getState() {
+	public PinState getState() {
 		return state;
 	}
 
-	interface State {
-
-		void handle(char pressedKey);
-	}
-
-	class ZeroPin implements State {
+	class ZeroPin implements PinState {
 
 		PinScreen screen;
 
@@ -96,7 +108,7 @@ public class PinScreen implements Screen, Subject {
 		}
 	}
 
-	class OnePin implements State {
+	class OnePin implements PinState {
 
 		PinScreen screen;
 
@@ -116,7 +128,7 @@ public class PinScreen implements Screen, Subject {
 		}
 	}
 
-	class TwoPins implements State {
+	class TwoPins implements PinState {
 
 		PinScreen screen;
 
@@ -136,7 +148,7 @@ public class PinScreen implements Screen, Subject {
 		}
 	}
 
-	class ThreePins implements State {
+	class ThreePins implements PinState {
 
 		PinScreen screen;
 
@@ -152,7 +164,7 @@ public class PinScreen implements Screen, Subject {
 				boolean isValid = pin.validate(keys);
 
 				if (isValid) {
-					controller.setScreen(controller.MainScreen);
+					controller.setScreen(new MainScreen());
 				} else {
 					keyIndex = 0;
 					setState(ZeroPin);
@@ -179,6 +191,9 @@ public class PinScreen implements Screen, Subject {
 		observers.remove(o);
 	}
 
+	/**
+	 * Inform the observers to update their data.
+	 */
 	@Override
 	public void inform() {
 		for (Observer observer : observers) {
