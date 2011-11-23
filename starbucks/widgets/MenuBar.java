@@ -1,4 +1,4 @@
-package core;
+package widgets;
 public interface MenuBar {
 
 	public void menuCards();

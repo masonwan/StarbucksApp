@@ -1,6 +1,6 @@
 package screens;
 
-import core.*;
+import widgets.*;
 
 public abstract class ScreenBase implements Screen {
 	protected final AppController controller;

@@ -1,6 +1,6 @@
 package commands;
 
-import core.*;
+import widgets.*;
 public abstract class CommandBase implements Command {
 	protected AppController controller;
 	

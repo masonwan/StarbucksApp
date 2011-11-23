@@ -1,6 +1,6 @@
 package screens;
 
-import core.*;
+import widgets.*;
 
 public class PayScreen extends ScreenBase {
 	KeyPad keyPad = new KeyPad();

@@ -1,8 +1,8 @@
-package core;
+package chains;
 
 import screens.*;
 
-public class AddNewCardScreenTouchHandler extends HandlerBase {
+public class PinScreenTouchHandler extends HandlerBase {
 	@Override
 	protected void onHandle(Object sender, Object arg) {
 		if (arg instanceof int[]) {

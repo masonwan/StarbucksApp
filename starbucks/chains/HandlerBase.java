@@ -1,4 +1,4 @@
-package core;
+package chains;
 public abstract class HandlerBase implements Handler {
 	protected Handler nextHandler;
 

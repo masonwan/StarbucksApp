@@ -1,6 +1,7 @@
 package screens;
 
-import core.*;
+import chains.Handler;
+import adapters.KeyPadAdapter;
 
 public class AddNewCardScreen extends ScreenBase {
 

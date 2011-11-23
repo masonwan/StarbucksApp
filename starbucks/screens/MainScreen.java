@@ -1,16 +1,10 @@
 package screens;
 
-import core.*;
 
-import java.util.ArrayList;
+import widgets.*;
 
 public class MainScreen extends ScreenBase {
 	Card card = new Card();
-	ArrayList<Card> cards = new ArrayList<Card>();
-
-	public MainScreen() {
-		cards.add(new Card());
-	}
 
 	@Override
 	public void touch(int x, int y) {

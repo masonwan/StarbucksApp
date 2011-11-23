@@ -1,4 +1,7 @@
-package core;
+package adapters;
+
+import widgets.KeyPad;
+
 public class KeyPadAdapter {
 
 	KeyPad keyPad = new KeyPad();

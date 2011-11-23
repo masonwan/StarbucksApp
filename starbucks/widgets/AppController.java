@@ -1,4 +1,4 @@
-package core;
+package widgets;
 
 import screens.*;
 import commands.*;
@@ -34,20 +34,25 @@ public class AppController implements Screen, MenuBar {
 
 	// State pattern.
 
-//	PinScreen PinScreen;
-//	MainScreen MainScreen;
-//	PayScreen PayScreen;
-//	OptionsScreen OptionsScreen;
-//	MoreOptionsScreen MoreOptionsScreen;
-//	PaymentsScreen PaymentsScreen;
-//	RewardsScreen RewardsScreen;
-//	StoresScreen StoresScreen;
-//	SettingsScreen SettingsScreen;
-//	AddNewCardScreen AddNewCardScreen;
 	private Screen screen;
 
 	public Screen setScreen(Screen screen) {
+		Screen oldScreen = this.screen;
 		this.screen = screen;
+
+		String oldScreenName = (oldScreen == null) ? "null" : oldScreen.getClass().getSimpleName();
+		String newscreenName = this.screen.getClass().getSimpleName();
+
+		if (oldScreenName == newscreenName) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		System.out.println(String.format("The screen was changed from %s to %s", oldScreenName, newscreenName));
+
 		screen.display();
 
 		return this.screen;
@@ -58,16 +63,6 @@ public class AppController implements Screen, MenuBar {
 	}
 
 	public void startUp() {
-//		PinScreen = new PinScreen(this);
-//		MainScreen = new MainScreen(this);
-//		PayScreen = new PayScreen(this);
-//		OptionsScreen = new OptionsScreen(this);
-//		MoreOptionsScreen = new MoreOptionsScreen(this);
-//		PaymentsScreen = new PaymentsScreen(this);
-//		RewardsScreen = new RewardsScreen(this);
-//		StoresScreen = new StoresScreen(this);
-//		SettingsScreen = new SettingsScreen(this);
-//		AddNewCardScreen = new AddNewCardScreen(this);
 		setScreen(new PinScreen());
 	}
 
@@ -76,7 +71,6 @@ public class AppController implements Screen, MenuBar {
 	@Override
 	public void touch(int x, int y) {
 		screen.touch(x, y);
-		screen.display(); // Automatically trigger display for every action.
 	}
 
 	@Override
