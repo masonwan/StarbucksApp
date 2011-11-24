@@ -1,12 +1,10 @@
 package screens;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import widgets.Card;
-import widgets.Pin;
-import adapters.KeyPadAdapter;
-import chains.AddNewCardScreenTouchHandler;
-import chains.Handler;
+import widgets.*;
+import adapters.*;
+import chains.*;
 
 public class AddNewCardScreen extends ScreenBase {
 
@@ -37,12 +35,12 @@ public class AddNewCardScreen extends ScreenBase {
 	}
 
 	@Override
-	public void topLeftCmd() {
+	public void topLeftCommand() {
 		controller.setScreen(new SettingsScreen());
 	}
 
 	@Override
-	public void topRightCmd() {
+	public void topRightCommand() {
 		char[] idTemp = new char[16];
 
 		for (int i = 0; i < id.size(); i++) {
@@ -56,7 +54,7 @@ public class AddNewCardScreen extends ScreenBase {
 		}
 
 		controller.setCard(new Card(idTemp, new Pin(pinCodeTemp)));
-		controller.setScreen(new PinScreen());
+		controller.setScreen(new MainScreen());
 	}
 
 	// Focus management.

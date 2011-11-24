@@ -6,7 +6,7 @@ public interface Screen {
 
 	public void display();
 
-	public void topLeftCmd();
+	public void topLeftCommand();
 
-	public void topRightCmd();
+	public void topRightCommand();
 }

@@ -11,14 +11,13 @@ public abstract class ScreenBase implements Screen {
 
 	@Override
 	public void touch(int x, int y) {
-
 	}
 
 	@Override
-	public void topLeftCmd() {
+	public void topLeftCommand() {
 	}
 
 	@Override
-	public void topRightCmd() {
+	public void topRightCommand() {
 	}
 }

@@ -64,6 +64,8 @@ public class ScreenTest {
 		assertTrue(controller.getScreen() instanceof MoreOptionsScreen);
 	}
 
+	// TODO: create new card.
+
 	void touchCorrectPin() {
 		controller.startUp();
 		controller.touch(1, 5); // 1

@@ -86,13 +86,13 @@ public class AppController implements Screen, MenuBar {
 	}
 
 	@Override
-	public void topLeftCmd() {
-		screen.topLeftCmd();
+	public void topLeftCommand() {
+		screen.topLeftCommand();
 	}
 
 	@Override
-	public void topRightCmd() {
-		screen.topRightCmd();
+	public void topRightCommand() {
+		screen.topRightCommand();
 	}
 
 	// Implement MenuBar interface.

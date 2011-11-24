@@ -1,6 +1,5 @@
 package screens;
 
-
 public class PayScreen extends ScreenBase {
 
 	@Override

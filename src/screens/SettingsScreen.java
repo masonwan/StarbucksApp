@@ -14,12 +14,12 @@ public class SettingsScreen extends ScreenBase {
 	}
 
 	@Override
-	public void topLeftCmd() {
+	public void topLeftCommand() {
 
 	}
 
 	@Override
-	public void topRightCmd() {
+	public void topRightCommand() {
 
 	}
 }
