@@ -1,11 +1,12 @@
 package tests;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import widgets.*;
+import widgets.KeyPad;
 
 public class KeyPadTest {
 
@@ -20,6 +21,8 @@ public class KeyPadTest {
 	@After
 	public void tearDown() {
 	}
+
+	// TODO: refactoring.
 
 	@Test
 	public void TestKey1() {

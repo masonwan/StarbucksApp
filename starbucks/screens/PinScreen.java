@@ -1,30 +1,26 @@
 package screens;
 
-import adapters.*;
-import chains.*;
-import states.*;
-
 import java.util.ArrayList;
 
 import observers.Observer;
+import observers.PasscodeDisplay;
 import observers.Subject;
 import states.PinState;
-import widgets.*;
+import states.ZeroPin;
+import widgets.Pin;
+import adapters.KeyPadAdapter;
+import chains.Handler;
+import chains.PinScreenDisplayHandler;
+import chains.PinScreenTouchHandler;
 
 public class PinScreen extends ScreenBase implements Subject {
 
 	// Key management.
 
-	// private int keyIndex = 0;
-	// private char[] keys = new char[4];
 	private Pin pin = new Pin("1234".toCharArray());
 
 	public Pin getPin() {
 		return pin;
-	}
-
-	public int getNumKeys() {
-		return pin.getKeys().length;
 	}
 
 	private KeyPadAdapter keyPad = new KeyPadAdapter();
@@ -33,13 +29,18 @@ public class PinScreen extends ScreenBase implements Subject {
 		return keyPad;
 	}
 
-	private PasscodeDisplay passcodeDisplay;
+	// Chain of responsibility pattern.
+
 	private Handler handler;
+
+	public Handler getHanlder() {
+		return handler;
+	}
 
 	public PinScreen() {
 		setState(new ZeroPin(this));
 
-		attach(passcodeDisplay = new PasscodeDisplay());
+		attach(new PasscodeDisplay());
 
 		handler = new PinScreenTouchHandler();
 		handler.setNext(new PinScreenDisplayHandler());
@@ -50,7 +51,6 @@ public class PinScreen extends ScreenBase implements Subject {
 	@Override
 	public void touch(int x, int y) {
 		handler.handle(this, new int[] { x, y });
-		// state.handle(keyPad.press(x, y));
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class PinScreen extends ScreenBase implements Subject {
 		handler.handle(this, null);
 	}
 
-	// PinState pattern.
+	// State pattern.
 
 	private PinState state;
 

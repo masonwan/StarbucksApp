@@ -1,7 +1,7 @@
 package screens;
 
-import chains.Handler;
 import adapters.KeyPadAdapter;
+import chains.Handler;
 
 public class AddNewCardScreen extends ScreenBase {
 
@@ -10,8 +10,6 @@ public class AddNewCardScreen extends ScreenBase {
 	// Chain of responsibility pattern.
 
 	Handler handler;
-
-	//
 
 	char[] id = new char[16];
 	int idIndex = 0;
@@ -40,11 +38,11 @@ public class AddNewCardScreen extends ScreenBase {
 
 	@Override
 	public void topLeftCmd() {
-		// Cancel the card.
+		// TODO: Cancel the card.
 	}
 
 	@Override
 	public void topRightCmd() {
-		// Replace the card.
+		// TODO: Replace the card.
 	}
 }

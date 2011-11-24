@@ -1,12 +1,17 @@
 package tests;
 
-import static org.junit.Assert.*;
-import screens.*;
-import widgets.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import screens.MainScreen;
+import screens.MoreOptionsScreen;
+import screens.OptionsScreen;
+import screens.PayScreen;
+import screens.PinScreen;
+import widgets.AppController;
 
 public class AppControllerTest {
 
@@ -22,6 +27,7 @@ public class AppControllerTest {
 
 	@After
 	public void tearDown() {
+		app = null;
 	}
 
 	@Test
@@ -35,7 +41,7 @@ public class AppControllerTest {
 		app.touch(2, 8); // 0
 		app.touch(1, 6); // 4
 		assertTrue(app.getScreen() instanceof PinScreen);
-		assertTrue(((PinScreen) app.getScreen()).getNumKeys() == 0);
+		assertTrue(((PinScreen) app.getScreen()).getPin().getKeys().length == 0);
 	}
 
 	@Test

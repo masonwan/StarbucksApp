@@ -1,4 +1,5 @@
 package screens;
+
 public interface Screen {
 
 	public void touch(int x, int y);

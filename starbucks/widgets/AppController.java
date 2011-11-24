@@ -1,7 +1,14 @@
 package widgets;
 
-import screens.*;
-import commands.*;
+import screens.PinScreen;
+import screens.Screen;
+
+import commands.CardMenuCommand;
+import commands.MenuInvoker;
+import commands.PaymentMenuCommand;
+import commands.RewardsMenuCommand;
+import commands.SettingsMenuCommand;
+import commands.StoresMenuCommand;
 
 public class AppController implements Screen, MenuBar {
 
@@ -10,10 +17,14 @@ public class AppController implements Screen, MenuBar {
 	private AppController() { // Prevent instantiation.
 	}
 
-	static AppController appController = new AppController();
+	private static AppController controller;
 
 	public static AppController getAppController() {
-		return appController;
+		if (controller == null) {
+			controller = new AppController();
+		}
+
+		return controller;
 	}
 
 	// Card management.
@@ -27,10 +38,6 @@ public class AppController implements Screen, MenuBar {
 	public void setCard(Card card) {
 		this.card = card;
 	}
-
-	// Command pattern
-
-	private Command command;
 
 	// State pattern.
 
@@ -89,34 +96,37 @@ public class AppController implements Screen, MenuBar {
 	}
 
 	// Implement MenuBar interface.
+	// Command pattern.
+
+	MenuInvoker menuInvoker = new MenuInvoker();
 
 	@Override
 	public void menuCards() {
-		command = new CardMenuCommand();
-		command.execute();
+		menuInvoker.setCommand(new CardMenuCommand());
+		menuInvoker.execute();
 	}
 
 	@Override
 	public void menuPayments() {
-		command = new PaymentMenuCommand();
-		command.execute();
+		menuInvoker.setCommand(new PaymentMenuCommand());
+		menuInvoker.execute();
 	}
 
 	@Override
 	public void menuRewards() {
-		command = new RewardsMenuCommand();
-		command.execute();
+		menuInvoker.setCommand(new RewardsMenuCommand());
+		menuInvoker.execute();
 	}
 
 	@Override
 	public void menuStores() {
-		command = new StoresMenuCommand();
-		command.execute();
+		menuInvoker.setCommand(new StoresMenuCommand());
+		menuInvoker.execute();
 	}
 
 	@Override
 	public void menuSettings() {
-		command = new SettingsMenuCommand();
-		command.execute();
+		menuInvoker.setCommand(new SettingsMenuCommand());
+		menuInvoker.execute();
 	}
 }
