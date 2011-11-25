@@ -1,9 +1,8 @@
 package chains;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import screens.AddNewCardScreen;
-import screens.Focus;
+import screens.*;
 
 public class AddNewCardScreenTouchHandler extends HandlerBase {
 	@Override
@@ -41,6 +40,8 @@ public class AddNewCardScreenTouchHandler extends HandlerBase {
 					pinCode.add(pressedKey);
 				}
 			}
+
+			screen.display();
 		}
 	}
 }

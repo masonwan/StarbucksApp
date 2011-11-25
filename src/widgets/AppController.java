@@ -1,14 +1,8 @@
 package widgets;
 
-import screens.PinScreen;
-import screens.Screen;
+import screens.*;
 
-import commands.CardMenuCommand;
-import commands.MenuInvoker;
-import commands.PaymentMenuCommand;
-import commands.RewardsMenuCommand;
-import commands.SettingsMenuCommand;
-import commands.StoresMenuCommand;
+import commands.*;
 
 public class AppController implements Screen, MenuBar {
 

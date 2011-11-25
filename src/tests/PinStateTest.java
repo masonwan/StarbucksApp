@@ -25,6 +25,7 @@ public class PinStateTest {
 
 	@Test
 	public void zeroPin() {
+		System.out.println("\n==========Test zero pin");
 		reset();
 
 		controller.touch(1, 5); // 1
@@ -34,6 +35,7 @@ public class PinStateTest {
 
 	@Test
 	public void onePin() {
+		System.out.println("\n==========Test one pin");
 		reset();
 
 		screen.setState(new ZeroPin(screen));
@@ -47,6 +49,7 @@ public class PinStateTest {
 
 	@Test
 	public void twoPins() {
+		System.out.println("\n==========Test two pins");
 		reset();
 
 		screen.setState(new OnePin(screen));
@@ -60,6 +63,7 @@ public class PinStateTest {
 
 	@Test
 	public void threePins() {
+		System.out.println("\n==========Test three pins");
 		reset();
 
 		screen.setState(new TwoPins(screen));
@@ -69,6 +73,7 @@ public class PinStateTest {
 
 	@Test
 	public void wrongPinAndReset() {
+		System.out.println("\n==========Test wrong pin");
 		reset();
 
 		controller.touch(1, 5); // 1

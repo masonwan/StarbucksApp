@@ -64,7 +64,61 @@ public class ScreenTest {
 		assertTrue(controller.getScreen() instanceof MoreOptionsScreen);
 	}
 
-	// TODO: create new card.
+	@Test
+	public void addNewCard() {
+		System.out.println("\n==========Test adding new card");
+
+		touchCorrectPin();
+		controller.menuSettings();
+		controller.touch(1, 2);
+		AddNewCardScreen screen = (AddNewCardScreen) controller.getScreen();
+
+		// Focus pin.
+		controller.touch(2, 4);
+
+		// Type pin.
+		controller.touch(3, 6); // 6
+		controller.touch(1, 7); // 7
+		controller.touch(2, 7); // 8
+		controller.touch(3, 7); // 9
+
+		// Focus id.
+		controller.touch(1, 3);
+
+		// Type id.
+		controller.touch(1, 5); // 1
+		controller.touch(2, 5); // 2
+		controller.touch(3, 5); // 3
+		controller.touch(1, 6); // 4
+		controller.touch(2, 6); // 5
+		controller.touch(3, 6); // 6
+		controller.touch(1, 7); // 7
+		controller.touch(2, 7); // 8
+		controller.touch(3, 7); // 9
+		controller.touch(2, 8); // 0
+		controller.touch(1, 5); // 1
+		controller.touch(2, 5); // 2
+		controller.touch(3, 5); // 3
+		controller.touch(1, 6); // 4
+		controller.touch(2, 6); // 5
+		controller.touch(3, 6); // 6
+
+		controller.topRightCommand();
+		Card card = controller.getCard();
+		Pin pin = card.getPin();
+		pin.setKeys("6789".toCharArray());
+
+		assertTrue(pin.validate());
+
+		char[] idTested = card.getId();
+		char[] idSample = "1234567890123456".toCharArray();
+
+		for (int i = 0; i < idSample.length; i++) {
+			if (idTested[i] != idSample[i]) {
+				fail("The card id is different.");
+			}
+		}
+	}
 
 	void touchCorrectPin() {
 		controller.startUp();

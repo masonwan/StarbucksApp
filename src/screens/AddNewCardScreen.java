@@ -26,12 +26,12 @@ public class AddNewCardScreen extends ScreenBase {
 
 	@Override
 	public void touch(int x, int y) {
-		handler.handle(this, null);
+		handler.handle(this, new int[] { x, y });
 	}
 
 	@Override
 	public void display() {
-		System.out.println(String.format("Enter a new card:\nID: %d Code: %d", id.toString(), pinCode.toString()));
+		System.out.println(String.format("Enter a new card:\nID: %s Code: %s", id.toString(), pinCode.toString()));
 	}
 
 	@Override
