@@ -1,17 +1,13 @@
 package screens;
 
-import java.util.ArrayList;
+import java.util.*;
 
+import observers.*;
 import observers.Observer;
-import observers.PasscodeDisplay;
-import observers.Subject;
-import states.PinState;
-import states.ZeroPin;
-import widgets.Pin;
-import adapters.KeyPadAdapter;
-import chains.Handler;
-import chains.PinScreenDisplayHandler;
-import chains.PinScreenTouchHandler;
+import states.*;
+import widgets.*;
+import adapters.*;
+import chains.*;
 
 public class PinScreen extends ScreenBase implements Subject {
 

@@ -71,7 +71,6 @@ public class ScreenTest {
 		touchCorrectPin();
 		controller.menuSettings();
 		controller.touch(1, 2);
-		AddNewCardScreen screen = (AddNewCardScreen) controller.getScreen();
 
 		// Focus pin.
 		controller.touch(2, 4);

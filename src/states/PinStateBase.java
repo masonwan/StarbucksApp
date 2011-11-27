@@ -1,6 +1,6 @@
 package states;
 
-import screens.PinScreen;
+import screens.*;
 import widgets.*;
 
 public abstract class PinStateBase implements PinState {

@@ -1,6 +1,6 @@
 package chains;
 
-import screens.PinScreen;
+import screens.*;
 
 public class PinScreenDisplayHandler extends HandlerBase {
 	@Override

@@ -1,11 +1,7 @@
 package commands;
 
-import widgets.AppController;
+import widgets.*;
 
 public abstract class CommandBase implements Command {
-	protected AppController controller;
-
-	public CommandBase() {
-		controller = AppController.getAppController();
-	}
+	protected final AppController controller = AppController.getAppController();
 }

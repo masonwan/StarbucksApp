@@ -23,21 +23,33 @@ public class AddNewCardScreenTouchHandler extends HandlerBase {
 				char pressedKey = screen.getKeyPad().press(x, y);
 
 				if (screen.getFocus() == Focus.Id) {
-					if (id.size() == 16) {
-						return;
-					}
+					if (pressedKey == 'X' && id.size() > 0) {
+						id.remove(id.size() - 1);
+					} else if (pressedKey >= '0' && pressedKey <= '9') {
+						if (id.size() == 16) {
+							return;
+						}
 
-					id.add(pressedKey);
+						id.add(pressedKey);
 
-					if (id.size() == 16) {
-						screen.setFocus(Focus.Pin);
+						if (id.size() == 16) {
+							screen.setFocus(Focus.Pin);
+						}
 					}
 				} else if (screen.getFocus() == Focus.Pin) {
-					if (pinCode.size() == 4) {
-						return;
-					}
+					if (pressedKey == 'X' && pinCode.size() > 0) {
+						pinCode.remove(pinCode.size() - 1);
+					} else if (pressedKey >= '0' && pressedKey <= '9') {
+						if (id.size() == 16) {
+							return;
+						}
 
-					pinCode.add(pressedKey);
+						pinCode.add(pressedKey);
+
+						if (pinCode.size() == 4 && id.size() != 16) {
+							screen.setFocus(Focus.Pin);
+						}
+					}
 				}
 			}
 

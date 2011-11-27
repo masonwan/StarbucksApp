@@ -1,6 +1,6 @@
 package widgets;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Pin {
 

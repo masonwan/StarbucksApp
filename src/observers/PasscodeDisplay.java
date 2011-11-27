@@ -1,6 +1,6 @@
 package observers;
 
-import screens.PinScreen;
+import screens.*;
 
 public class PasscodeDisplay implements Observer {
 
