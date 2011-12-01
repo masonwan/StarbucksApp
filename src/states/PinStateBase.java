@@ -3,7 +3,7 @@ package states;
 import screens.*;
 import widgets.*;
 
-public abstract class PinStateBase implements PinState {
+public abstract class PinStateBase implements State {
 
 	protected final PinScreen screen;
 	protected final Pin pin;

@@ -1,6 +1,6 @@
 package states;
 
-public interface PinState {
+public interface State {
 
 	void handle(char pressedKey);
 }

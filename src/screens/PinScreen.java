@@ -56,16 +56,16 @@ public class PinScreen extends ScreenBase implements Subject {
 
 	// State pattern.
 
-	private PinState state;
+	private State state;
 
-	public PinState setState(PinState state) {
+	public State setState(State state) {
 		this.state = state;
 		inform();
 
 		return this.state;
 	}
 
-	public PinState getState() {
+	public State getState() {
 		return state;
 	}
 
