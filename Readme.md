@@ -6,9 +6,9 @@
 ##Description
 This project is one of the homework exercise made by Paul Nguyen during Fall 2011.
 
-Please do not copy the whole project. Refer to [school integrity policy](http://info.sjsu.edu/static/catalog/integrity.html). 
+Please do not copy the whole project. Check [school integrity policy](http://info.sjsu.edu/static/catalog/integrity.html).
 
-##License
+##GNU License
 This BlueJ project is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
