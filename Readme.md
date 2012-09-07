@@ -1,7 +1,4 @@
-#San Jose State University CMPE 202 Starbucks BlueJ Project#
-
-##Author
-[Mason Wan](https://plus.google.com/107802547581393709730/about)
+#San Jose State University CMPE 202 Starbucks BlueJ Project
 
 ##Description
 This project is one of the homework exercise made by Paul Nguyen during Fall 2011.
